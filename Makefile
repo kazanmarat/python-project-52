@@ -18,3 +18,9 @@ render-start:
 
 compile:
 	uv pip compile pyproject.toml -o requirements.txt
+
+i18n-ru:
+	uv run manage.py makemessages -l ru
+
+i18n-compile:
+	uv run manage.py compilemessages
