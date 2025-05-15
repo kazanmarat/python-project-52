@@ -19,7 +19,6 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-APP_DIR = Path(__file__).resolve().parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -45,8 +44,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd Party
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django_bootstrap5',
+    # Local
     'task_manager',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +92,7 @@ DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL,
                                       conn_max_age=600,
                                       conn_health_checks=True,
+                                      test_options={'NAME': 'mytestdatabase'},
                                       )
 }
 
@@ -121,7 +126,7 @@ LANGUAGES = [ # i18n
     ('ru', 'Russian'),
 ]
 
-LOCALE_PATHS = [APP_DIR / 'locale'] # i18n
+LOCALE_PATHS = [BASE_DIR / 'locale'] # i18n
 
 TIME_ZONE = 'UTC'
 
@@ -141,3 +146,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.CustomUser' # accounts
+
+LOGIN_REDIRECT_URL = 'home' # accounts
+LOGOUT_REDIRECT_URL = 'home' # accounts
+
+CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5' # crispy_forms
+CRISPY_TEMPLATE_PACK = 'bootstrap5' # crispy_forms

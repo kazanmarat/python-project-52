@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+  <h1>{% trans "Users" %}</h1>
+
+  <table class="table table-striped">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">{% trans "Username" %}</th>
+      <th scope="col">{% trans "Full name" %}</th>
+    </tr>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }} {{ user.last_name }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

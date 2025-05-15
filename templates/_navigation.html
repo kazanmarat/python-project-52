@@ -1,0 +1,42 @@
+{% load static %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">{% trans "Task manager" %}</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'user_list' %}">{% trans "Users" %}</a>
+          </li>
+
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="#">{% trans "Statuses" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">{% trans "Tags" %}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">{% trans "Tasks" %}</a>
+            </li>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <input class="btn nav-link" type="submit" value="{% trans 'Log out' %}">
+            </form>
+
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">{% trans "Log in" %}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'create' %}">{% trans "Sign up" %}</a>
+            </li>
+          {% endif %}
+          
+      </div>
+    </div>
+  </nav>
