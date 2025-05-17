@@ -12,13 +12,14 @@ class CustomUserTest(TestCase):
         response = self.client.get(user_list_url)
         users = response.context["users"]
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(user_list_url)
         self.assertTrue(len(users) == user_count)
 
     def test_user_create(self):
         user_signup_url = reverse("create")
         user_login_url = reverse("login")
         user_list_url = reverse("user_list")
-        user_count = CustomUser.objects.count()
+        initial_count = CustomUser.objects.count()
 
         # get sign up page and post user data with redirect on login page
         response = self.client.get(user_signup_url)
@@ -34,10 +35,10 @@ class CustomUserTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, user_login_url)
 
-        # check append user
+        # check added user
         response = self.client.get(user_list_url)
         users = response.context["users"]
-        self.assertTrue(len(users) == user_count + 1)
+        self.assertTrue(len(users) == initial_count + 1)
 
     def test_user_update(self):
         user = CustomUser.objects.get(pk=1)
@@ -45,7 +46,7 @@ class CustomUserTest(TestCase):
         user_list_url = reverse("user_list")
         login_url = reverse('login')
 
-        # try update and get redirect to login
+        # get update page and redirect to login
         response = self.client.get(update_url)
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(login_url)
@@ -73,12 +74,12 @@ class CustomUserTest(TestCase):
 
     def test_user_delete(self):
         user = CustomUser.objects.get(pk=1)
-        user_count = CustomUser.objects.count()
+        initial_count = CustomUser.objects.count()
         delete_url = reverse("user_delete", kwargs={"pk": user.id})
         user_list_url = reverse("user_list")
         login_url = reverse('login')
 
-        # try delete and get redirect to login
+        # get delete page and redirect to login
         response = self.client.get(delete_url)
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(login_url)
@@ -95,7 +96,8 @@ class CustomUserTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, user_list_url)
 
-        # check delete user
+        # check deleted user
         response = self.client.get(user_list_url)
         users = response.context["users"]
-        self.assertTrue(len(users) == user_count - 1)
+        self.assertTrue(len(users) == initial_count - 1)
+        self.assertNotContains(response, user.username)
