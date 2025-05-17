@@ -9,6 +9,8 @@
       <th scope="col">ID</th>
       <th scope="col">{% trans "Username" %}</th>
       <th scope="col">{% trans "Full name" %}</th>
+      <th scope="col">{% trans "Date of creation" %}</th>
+      <th scope="col"></th>
     </tr>
     <tbody>
       {% for user in users %}
@@ -16,6 +18,12 @@
         <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.first_name }} {{ user.last_name }}</td>
+        <td>{{ user.date_joined|date:"d.m.Y i:H" }}</td>
+        <td>
+          <a href="{% url 'user_update' user.id %}">{% trans "Update" %}</a>
+          <br>
+          <a href="{% url 'user_delete' user.id %}">{% trans "Delete" %}</a>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
