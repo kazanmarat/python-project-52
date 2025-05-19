@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -43,7 +43,7 @@ class UserListView(ListView):
     ordering = ['id']
 
 
-class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UserUpdateView(UserPassesTestMixin, UpdateView):
     model = CustomUser
     template_name = 'account/user_update.html'
     fields = ('first_name', 'last_name','username', 'password')
@@ -67,7 +67,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return redirect(reverse_lazy('user_list'))
 
 
-class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class UserDeleteView(UserPassesTestMixin, DeleteView):
     model = CustomUser
     context_object_name = 'user'
     template_name = 'account/user_delete.html'
