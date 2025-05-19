@@ -43,50 +43,39 @@ class UserListView(ListView):
     ordering = ['id']
 
 
-class UserUpdateView(UserPassesTestMixin, UpdateView):
+class CustomUserPassesTestMixin(UserPassesTestMixin):
+    def test_func(self): 
+        profile = self.get_object() 
+        return profile.id == self.request.user.id
+
+    def handle_no_permission(self):
+        if self.request.user.is_anonymous:
+            messages.error(self.request, _('You are not logged in! Please log in.'))
+            return redirect(reverse_lazy('login'))
+        else:
+            messages.error(self.request, _('You do not have permission to modify another user.'))
+            return redirect(reverse_lazy('user_list'))
+    
+
+class UserUpdateView(CustomUserPassesTestMixin, UpdateView):
     model = CustomUser
     template_name = 'account/user_update.html'
     fields = ('first_name', 'last_name','username', 'password')
     success_url = reverse_lazy('user_list')
-    
-    def test_func(self): 
-        profile = self.get_object() 
-        return profile.id == self.request.user.id
 
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(self.request, _('User successfully updated.'))
         return response
-    
-    def handle_no_permission(self):
-        if self.request.user.is_anonymous:
-            messages.error(self.request, _('You are not logged in! Please log in.'))
-            return redirect(reverse_lazy('login'))
-        else:
-            messages.error(self.request, _('You do not have permission to modify another user.'))
-            return redirect(reverse_lazy('user_list'))
 
 
-class UserDeleteView(UserPassesTestMixin, DeleteView):
+class UserDeleteView(CustomUserPassesTestMixin, DeleteView):
     model = CustomUser
     context_object_name = 'user'
     template_name = 'account/user_delete.html'
     success_url = reverse_lazy('user_list')
 
-    def test_func(self): 
-        profile = self.get_object() 
-        return profile.id == self.request.user.id
-
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(self.request, _('User successfully deleted.'))
         return response
-
-    def handle_no_permission(self):
-        if self.request.user.is_anonymous:
-            messages.error(self.request, _('You are not logged in! Please log in.'))
-            return redirect(reverse_lazy('login'))
-        else:
-            messages.error(self.request, _('You do not have permission to modify another user.'))
-            return redirect(reverse_lazy('user_list'))
-
