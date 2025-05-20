@@ -40,7 +40,7 @@ class StatusUpdateView(CustomLoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, _('Status successfully updated.')) # Статус успешно изменен.
+        messages.success(self.request, _('Status successfully updated.'))
         return response
 
 class StatusDeleteView(CustomLoginRequiredMixin, DeleteView):
@@ -51,5 +51,5 @@ class StatusDeleteView(CustomLoginRequiredMixin, DeleteView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, _('Status successfully deleted.')) # Статус успешно удален.
+        messages.success(self.request, _('Status successfully deleted.'))
         return response

@@ -1,0 +1,20 @@
+[
+    {
+        "model": "accounts.customuser",
+        "pk": 1,
+        "fields": {
+            "password": "testpass12345",
+            "last_login": "2025-05-13T06:08:42.320Z",
+            "is_superuser": false,
+            "username": "testuser",
+            "first_name": "testname",
+            "last_name": "testname",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2025-05-05T11:56:46.296Z",
+            "groups": [],
+            "user_permissions": []
+            }
+        }
+]
