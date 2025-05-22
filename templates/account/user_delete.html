@@ -3,7 +3,7 @@
 {% block content %}
 
   <h1>{% trans "Deleting user" %}</h1>
-  <p>{% trans "Are you sure you want to delete" %} {{ user.first_name }} {{ user.last_name }}?</p>
+  <p>{% trans "Are you sure you want to delete" %} {{ user }}?</p>
     <form method="post">
         {% csrf_token %}
         {{ form }}
