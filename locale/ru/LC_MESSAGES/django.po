@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-19 11:55+0000\n"
+"POT-Creation-Date: 2025-05-23 05:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Вы залогинены."
 msgid "You are logged out."
 msgstr "Вы разлогинены."
 
-#: accounts/views.py:53 statuses/views.py:13
+#: accounts/views.py:53 statuses/views.py:13 tasks/views.py:14
 msgid "You are not logged in! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
@@ -48,9 +48,18 @@ msgstr "Пользователь успешно изменен."
 msgid "User successfully deleted."
 msgstr "Пользователь успешно удален."
 
-#: statuses/models.py:8
+#: statuses/models.py:7 tasks/models.py:9
 msgid "name"
 msgstr "Имя"
+
+#: statuses/models.py:11 templates/tasks/task_list.html:13
+msgid "Status"
+msgstr "Статус"
+
+#: statuses/models.py:12 templates/_navigation.html:18
+#: templates/statuses/status_list.html:5
+msgid "Statuses"
+msgstr "Статусы"
 
 #: statuses/views.py:31
 msgid "Status successfully created."
@@ -64,6 +73,39 @@ msgstr "Статус успешно изменен."
 msgid "Status successfully deleted."
 msgstr "Статус успешно удален."
 
+#: tasks/models.py:10
+msgid "description"
+msgstr "описание"
+
+#: tasks/models.py:23
+msgid "tag"
+msgstr "метка"
+
+#: tasks/models.py:27
+msgid "Task"
+msgstr "Задача"
+
+#: tasks/models.py:28 templates/_navigation.html:24
+#: templates/tasks/task_list.html:5
+msgid "Tasks"
+msgstr "Задачи"
+
+#: tasks/views.py:17
+msgid "Task can only be deleted by its author."
+msgstr "Задачу может удалить только ее автор."
+
+#: tasks/views.py:36
+msgid "Task successfully created."
+msgstr "Задача успешно создана."
+
+#: tasks/views.py:48
+msgid "Task successfully updated."
+msgstr "Задача успешно изменена."
+
+#: tasks/views.py:65
+msgid "Task successfully deleted."
+msgstr "Задача успешно удалена."
+
 #: templates/_navigation.html:6
 msgid "Task manager"
 msgstr "Менеджер задач"
@@ -72,17 +114,9 @@ msgstr "Менеджер задач"
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/_navigation.html:18 templates/statuses/status_list.html:5
-msgid "Statuses"
-msgstr "Статусы"
-
 #: templates/_navigation.html:21
 msgid "Tags"
 msgstr "Метки"
-
-#: templates/_navigation.html:24
-msgid "Tasks"
-msgstr "Задачи"
 
 #: templates/_navigation.html:28
 msgid "Log out"
@@ -103,11 +137,12 @@ msgid "Deleting user"
 msgstr "Удаление пользователя"
 
 #: templates/account/user_delete.html:6 templates/statuses/status_delete.html:6
+#: templates/tasks/task_delete.html:6
 msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
 #: templates/account/user_delete.html:10
-#: templates/statuses/status_delete.html:10
+#: templates/statuses/status_delete.html:10 templates/tasks/task_delete.html:10
 msgid "Confirm"
 msgstr "Подтвердить"
 
@@ -120,16 +155,19 @@ msgid "Full name"
 msgstr "Полное имя"
 
 #: templates/account/user_list.html:12 templates/statuses/status_list.html:13
+#: templates/tasks/task_list.html:16
 msgid "Date of creation"
 msgstr "Дата создания"
 
 #: templates/account/user_list.html:23 templates/account/user_update.html:11
 #: templates/statuses/status_list.html:23
-#: templates/statuses/status_update.html:11
+#: templates/statuses/status_update.html:11 templates/tasks/task_list.html:29
+#: templates/tasks/task_update.html:11
 msgid "Update"
 msgstr "Изменить"
 
 #: templates/account/user_list.html:25 templates/statuses/status_list.html:25
+#: templates/tasks/task_list.html:31
 msgid "Delete"
 msgstr "Удалить"
 
@@ -154,7 +192,7 @@ msgstr "Узнать больше"
 msgid "Create status"
 msgstr "Создать статус"
 
-#: templates/statuses/status_create.html:9
+#: templates/statuses/status_create.html:9 templates/tasks/task_create.html:9
 msgid "Create"
 msgstr "Создать"
 
@@ -162,10 +200,30 @@ msgstr "Создать"
 msgid "Delete status"
 msgstr "Удаление статуса"
 
-#: templates/statuses/status_list.html:12
+#: templates/statuses/status_list.html:12 templates/tasks/task_list.html:12
 msgid "Name"
 msgstr "Имя"
 
 #: templates/statuses/status_update.html:7
 msgid "Change status"
 msgstr "Изменение статуса"
+
+#: templates/tasks/task_create.html:6 templates/tasks/task_list.html:7
+msgid "Create task"
+msgstr "Создать задачу"
+
+#: templates/tasks/task_delete.html:5
+msgid "Delete task"
+msgstr "Удаление задачи"
+
+#: templates/tasks/task_list.html:14
+msgid "Author"
+msgstr "Автор"
+
+#: templates/tasks/task_list.html:15
+msgid "Executor"
+msgstr "Исполнитель"
+
+#: templates/tasks/task_update.html:7
+msgid "Change task"
+msgstr "Изменение задачи"

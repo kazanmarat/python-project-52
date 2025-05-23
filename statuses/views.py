@@ -16,7 +16,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 class StatusListView(CustomLoginRequiredMixin, ListView):
     model = Status
-    template = 'statuses/status_list.html'
+    template_name = 'statuses/status_list.html'
     context_object_name = 'statuses'
     ordering = ['id']
 

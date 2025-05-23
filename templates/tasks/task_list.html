@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+<h1>{% trans "Tasks" %}</h1>
+
+<a class="btn btn-primary" href="{% url 'task_create' %}">{% trans "Create task" %}</a>
+
+<table class="table table-striped">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">{% trans "Name" %}</th>
+    <th scope="col">{% trans "Status" %}</th>
+    <th scope="col">{% trans "Author" %}</th>
+    <th scope="col">{% trans "Executor" %}</th>
+    <th scope="col">{% trans "Date of creation" %}</th>
+    <th scope="col"></th>
+  </tr>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <td>{{ task.id }}</td>
+      <td>{{ task.name }}</td>
+      <td>{{ task.status }}</td>
+      <td>{{ task.author }}</td>
+      <td>{{ task.executor }}</td>
+      <td>{{ task.date_creation|date:"d.m.Y H:i" }}</td>
+      <td>
+        <a href="{% url 'task_update' task.id %}">{% trans "Update" %}</a>
+        <br>
+        <a href="{% url 'task_delete' task.id %}">{% trans "Delete" %}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
