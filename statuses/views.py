@@ -1,5 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.deletion import ProtectedError
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -50,6 +51,10 @@ class StatusDeleteView(CustomLoginRequiredMixin, DeleteView):
     template_name = 'statuses/status_delete.html'
 
     def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, _('Status successfully deleted.'))
-        return response
+        try:
+            response = super().form_valid(form)
+            messages.success(self.request, _('Status successfully deleted.'))
+            return response
+        except ProtectedError:
+            messages.error(self.request, _('Cannot delete status because it is in use.'))
+            return redirect(reverse_lazy('status_list'))

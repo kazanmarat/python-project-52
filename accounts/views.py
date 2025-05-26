@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext as _
 from .models import CustomUser
 from .forms import CustomUserCreationForm
@@ -76,6 +77,10 @@ class UserDeleteView(CustomUserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('user_list')
 
     def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, _('User successfully deleted.'))
-        return response
+        try:
+            response = super().form_valid(form)
+            messages.success(self.request, _('User successfully deleted.'))
+            return response
+        except ProtectedError:
+            messages.error(self.request, _('Cannot delete user because it is in use.'))
+            return redirect(reverse_lazy('user_list'))
