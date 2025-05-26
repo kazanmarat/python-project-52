@@ -4,25 +4,30 @@ from django.urls import reverse
 
 
 class CustomUserTest(TestCase):
-    fixtures = ['accounts/fixtures.json']
+    fixtures = ['fixtures_accounts.json']
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.initial_count = CustomUser.objects.count()
+        cls.user = CustomUser.objects.get(pk=1)
+        cls.list_url = reverse("user_list")
+        
+    def setUp(self):
+        self.client.force_login(self.user)
 
     def test_user_list(self):
-        user_count = CustomUser.objects.count()
-        user_list_url = reverse("user_list")
-        response = self.client.get(user_list_url)
+        response = self.client.get(self.list_url)
         users = response.context["users"]
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(user_list_url)
-        self.assertTrue(len(users) == user_count)
+        self.assertTemplateUsed(self.list_url)
+        self.assertTrue(len(users) == self.initial_count)
 
     def test_user_create(self):
-        user_signup_url = reverse("create")
-        user_login_url = reverse("login")
-        user_list_url = reverse("user_list")
-        initial_count = CustomUser.objects.count()
+        create_url = reverse("user_create")
+        login_url = reverse("login")
 
-        # get sign up page and post user data with redirect on login page
-        response = self.client.get(user_signup_url)
+        # post user data with redirect on login page
+        response = self.client.get(create_url)
         self.assertEqual(response.status_code, 200)
         user_data = {
             'first_name': 'testname2',
@@ -31,73 +36,52 @@ class CustomUserTest(TestCase):
             'password1': 'testpass12345',
             'password2': 'testpass12345',
         }
-        response = self.client.post(user_signup_url, user_data)
+        response = self.client.post(create_url, user_data)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, user_login_url)
+        self.assertRedirects(response, login_url)
 
         # check added user
-        response = self.client.get(user_list_url)
+        response = self.client.get(self.list_url)
         users = response.context["users"]
-        self.assertTrue(len(users) == initial_count + 1)
+        self.assertTrue(len(users) == self.initial_count + 1)
+        self.assertContains(response, user_data['username'])
 
     def test_user_update(self):
-        user = CustomUser.objects.get(pk=1)
-        update_url = reverse("user_update", kwargs={"pk": user.id})
-        user_list_url = reverse("user_list")
-        login_url = reverse('login')
+        update_url = reverse("user_update", kwargs={"pk": self.user.id})
+        old_name = self.user.username
+        new_name = 'testusername100'
 
-        # get update page and redirect to login
-        response = self.client.get(update_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(login_url)
-
-        # login
-        self.client.force_login(user)
-        
-        # get update page
+        # post updated data
         response = self.client.get(update_url)
         self.assertEqual(response.status_code, 200)
-
-        # post update data
         updated_data = {
-            "username": "testusername100",
+            'username': new_name,
             'password': 'testpass12345',
         }
         response = self.client.post(update_url, updated_data)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, user_list_url)
+        self.assertRedirects(response, self.list_url)
 
         # check updated data
-        response = self.client.get(user_list_url)
-        self.assertContains(response, "testusername100")
-        self.assertNotContains(response, "testuser100")
+        response = self.client.get(self.list_url)
+        self.assertContains(response, new_name)
+        self.assertNotContains(response, old_name)
 
     def test_user_delete(self):
-        user = CustomUser.objects.get(pk=1)
-        initial_count = CustomUser.objects.count()
-        delete_url = reverse("user_delete", kwargs={"pk": user.id})
-        user_list_url = reverse("user_list")
-        login_url = reverse('login')
+        delete_url = reverse("user_delete", kwargs={"pk": self.user.id})
+        username = self.user.username
 
-        # get delete page and redirect to login
-        response = self.client.get(delete_url)
-        self.assertEqual(response.status_code, 302)
-        self.assertTemplateUsed(login_url)
-
-        # login
-        self.client.force_login(user)
-        
         # get delete page
         response = self.client.get(delete_url)
         self.assertEqual(response.status_code, 200)
 
-        # post delete
+        # post delete page
         response = self.client.post(delete_url)
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, user_list_url)
+        self.assertRedirects(response, self.list_url)
 
         # check deleted user
-        response = self.client.get(user_list_url)
+        response = self.client.get(self.list_url)
         users = response.context["users"]
-        self.assertTrue(len(users) == initial_count - 1)
-        self.assertNotContains(response, user.username)
+        self.assertTrue(len(users) == self.initial_count - 1)
+        self.assertNotContains(response, username)

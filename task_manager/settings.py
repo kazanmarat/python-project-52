@@ -156,3 +156,5 @@ LOGOUT_REDIRECT_URL = 'home' # accounts
 
 CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5' # crispy_forms
 CRISPY_TEMPLATE_PACK = 'bootstrap5' # crispy_forms
+
+FIXTURE_DIRS = ['fixtures']
