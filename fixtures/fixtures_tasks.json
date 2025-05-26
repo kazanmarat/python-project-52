@@ -1,0 +1,28 @@
+[
+    {
+        "model": "tasks.task",
+        "pk": 1,
+        "fields": {
+            "name": "test task 1",
+            "description": "desc 1",
+            "status": 1,
+            "author": 1,
+            "executor": 1,
+            "tag": null,
+            "date_creation": "2025-05-22T05:04:15.228Z"
+        }
+    },
+    {
+        "model": "tasks.task",
+        "pk": 2,
+        "fields": {
+            "name": "test task 2",
+            "description": "desc 1",
+            "status": 1,
+            "author": 1,
+            "executor": 1,
+            "tag": null,
+            "date_creation": "2025-05-22T05:04:34.976Z"
+        }
+    }
+]

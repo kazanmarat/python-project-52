@@ -19,13 +19,16 @@ render-start:
 compile:
 	uv pip compile pyproject.toml -o requirements.txt
 
-test: test-accounts test-statuses
+test: test-accounts test-statuses test-tasks
 
 test-accounts:
 	uv run manage.py test accounts
 
 test-statuses:
 	uv run manage.py test statuses
+
+test-tasks:
+	uv run manage.py test tasks
 
 i18n-ru:
 	uv run manage.py makemessages -l ru

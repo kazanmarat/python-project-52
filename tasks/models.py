@@ -7,7 +7,7 @@ from accounts.models import CustomUser
 
 class Task(models.Model):
     name = models.CharField(_("name"), max_length=150, unique=True)
-    description = models.TextField(_("description"))
+    description = models.TextField(_("description"), null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT)
     author = models.ForeignKey(
         CustomUser,

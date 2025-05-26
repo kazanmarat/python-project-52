@@ -9,13 +9,10 @@ from .forms import TaskCreationForm, TaskChangeForm
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
+    
     def handle_no_permission(self):
-        if self.request.user.is_anonymous:
-            messages.error(self.request, _('You are not logged in! Please log in.'))
-            return redirect(reverse_lazy('login'))
-        else: # Задачу может удалить только ее автор
-            messages.error(self.request, _('Task can only be deleted by its author.'))
-            return redirect(reverse_lazy('task_list'))
+        messages.error(self.request, _('You are not logged in! Please log in.'))
+        return redirect(reverse_lazy('login'))
 
 
 class TaskListView(CustomLoginRequiredMixin, ListView):
@@ -57,8 +54,14 @@ class TaskDeleteView(CustomLoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self): 
         task = self.get_object()
-        author_task = task.author
-        return author_task.id == self.request.user.id
+        return task.author == self.request.user
+
+    def handle_no_permission(self):
+        if self.request.user.is_anonymous:
+            return super().handle_no_permission()
+        else:
+            messages.error(self.request, _('Task can only be deleted by its author.'))
+            return redirect(reverse_lazy('task_list'))
 
     def form_valid(self, form):
         response = super().form_valid(form)
