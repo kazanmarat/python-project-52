@@ -56,7 +56,8 @@ class CustomUserTest(TestCase):
         self.assertEqual(response.status_code, 200)
         updated_data = {
             'username': new_name,
-            'password': 'testpass12345',
+            'password1': 'testpass12345',
+            'password2': 'testpass12345',
         }
         response = self.client.post(update_url, updated_data)
         self.assertEqual(response.status_code, 302)

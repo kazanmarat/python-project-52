@@ -7,8 +7,8 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext as _
 from .models import CustomUser
-from .forms import CustomUserCreationForm
-    
+from .forms import CustomUserChangeForm, CustomUserCreationForm
+
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
@@ -47,7 +47,7 @@ class UserListView(ListView):
 class CustomUserPassesTestMixin(UserPassesTestMixin):
     def test_func(self): 
         profile = self.get_object() 
-        return profile.id == self.request.user.id
+        return profile == self.request.user
 
     def handle_no_permission(self):
         if self.request.user.is_anonymous:
@@ -60,8 +60,8 @@ class CustomUserPassesTestMixin(UserPassesTestMixin):
 
 class UserUpdateView(CustomUserPassesTestMixin, UpdateView):
     model = CustomUser
+    form_class = CustomUserChangeForm
     template_name = 'account/user_update.html'
-    fields = ('first_name', 'last_name','username', 'password')
     success_url = reverse_lazy('user_list')
 
     def form_valid(self, form):
