@@ -7,7 +7,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext as _
 from .models import CustomUser
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserUpdateForm
 
 
 class SignUpView(CreateView):
@@ -60,7 +60,7 @@ class CustomUserPassesTestMixin(UserPassesTestMixin):
 
 class UserUpdateView(CustomUserPassesTestMixin, UpdateView):
     model = CustomUser
-    form_class = CustomUserChangeForm
+    form_class = CustomUserUpdateForm
     template_name = 'account/user_update.html'
     success_url = reverse_lazy('user_list')
 
