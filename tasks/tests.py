@@ -16,6 +16,7 @@ class TaskTest(TestCase):
         cls.initial_count = Task.objects.count()
         cls.user = CustomUser.objects.get(pk=1)
         cls.task = Task.objects.get(pk=1)
+        cls.status = Status.objects.get(pk=1)
         cls.list_url = reverse("task_list")
         
     def setUp(self):
@@ -46,6 +47,15 @@ class TaskTest(TestCase):
         statuses = response.context["tasks"]
         self.assertContains(response, 'test task 3')
         self.assertTrue(len(statuses) == self.initial_count + 1)
+
+    def test_task_detail(self):
+        detail_url = reverse("task_detail", kwargs={"pk": self.task.id})
+        response = self.client.get(detail_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(detail_url)
+        self.assertContains(response, self.task)
+        self.assertContains(response, self.status)
+        self.assertContains(response, self.user)
 
     def test_task_update(self):
         old_name = self.task.name

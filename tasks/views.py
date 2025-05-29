@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
@@ -32,6 +32,12 @@ class TaskCreateView(CustomLoginRequiredMixin, CreateView):
         response = super().form_valid(form)
         messages.success(self.request, _('Task successfully created.'))
         return response
+
+
+class TaskDetailView(CustomLoginRequiredMixin, DetailView):
+    model = Task
+    template_name = 'tasks/task_detail.html'
+    context_object_name = 'task'
 
 
 class TaskUpdateView(CustomLoginRequiredMixin, UpdateView):
