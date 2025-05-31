@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from accounts.models import CustomUser
 from statuses.models import Status
-from .models import Task
+from .models import Task, TaskLabel
 from labels.models import Label
 
 
@@ -60,6 +60,9 @@ class TaskTest(TestCase):
         self.assertContains(response, self.task)
         self.assertContains(response, self.status)
         self.assertContains(response, self.user)
+        self.assertContains(response, self.label)
+        task_label_count = TaskLabel.objects.filter(task=self.task).count()
+        self.assertEqual(task_label_count, 2)
 
     def test_task_update(self):
         old_name = self.task.name
@@ -72,15 +75,21 @@ class TaskTest(TestCase):
         task_data = {"name": new_name,
                      "status": 1,
                      "executor": 1,
-                     "labels": [2]
+                     "labels": [1]
                      }
         response = self.client.post(update_url, task_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.list_url)
 
         # check updated task
-        response = self.client.get(self.list_url)
+        detail_url = reverse("task_detail", kwargs={"pk": self.task.id})
+        response = self.client.get(detail_url)
+        task_label_count = TaskLabel.objects.filter(task=self.task).count()
         self.assertContains(response, new_name)
+        self.assertContains(response, self.status)
+        self.assertContains(response, self.user)
+        self.assertContains(response, self.label)
+        self.assertEqual(task_label_count, 1)
         self.assertNotContains(response, old_name)
 
     def test_task_delete(self):

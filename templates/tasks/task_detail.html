@@ -30,11 +30,10 @@
       <div class="row p-1">
         <div class="col">{% trans "Labels" %}</div>
           <div>
-            {% if task.label %}
-            {{task.status}}
+            {% if task.labels %}
               <ul>
-                {% for unit_label in task.label.all %}
-                <li>{{ unit_label }}</li>
+                {% for label in task.labels.all %}
+                <li>{{ label }}</li>
                 {% endfor %}
               </ul>
             {% endif %}
