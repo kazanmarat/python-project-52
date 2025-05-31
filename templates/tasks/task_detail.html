@@ -28,12 +28,13 @@
         <div class="col">{{ task.date_creation }}</div>
       </div>
       <div class="row p-1">
-        <div class="col">{% trans "Tags" %}</div>
+        <div class="col">{% trans "Labels" %}</div>
           <div>
-            {% if task.tag %}
+            {% if task.label %}
+            {{task.status}}
               <ul>
-                {% for unit_tag in tag %}
-                <li>{{ unit_tag }}</li>
+                {% for unit_label in task.label.all %}
+                <li>{{ unit_label }}</li>
                 {% endfor %}
               </ul>
             {% endif %}

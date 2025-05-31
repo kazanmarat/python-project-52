@@ -3,12 +3,14 @@ from django.urls import reverse
 from accounts.models import CustomUser
 from statuses.models import Status
 from .models import Task
+from labels.models import Label
 
 
 class TaskTest(TestCase):
-    fixtures = ['fixtures_tasks.json',
-                'fixtures_accounts.json',
-                'fixtures_statuses.json',
+    fixtures = ["fixtures_tasks.json",
+                "fixtures_accounts.json",
+                "fixtures_statuses.json",
+                "fixtures_labels.json",
                 ]
 
     @classmethod
@@ -17,6 +19,7 @@ class TaskTest(TestCase):
         cls.user = CustomUser.objects.get(pk=1)
         cls.task = Task.objects.get(pk=1)
         cls.status = Status.objects.get(pk=1)
+        cls.label = Label.objects.get(pk=1)
         cls.list_url = reverse("task_list")
         
     def setUp(self):
@@ -34,9 +37,10 @@ class TaskTest(TestCase):
         create_url = reverse("task_create")
         response = self.client.get(create_url)
         self.assertEqual(response.status_code, 200)
-        task_data = {'name': 'test task 3',
+        task_data = {"name": "test task 3",
                      "status": 1,
                      "author": 1,
+                     "labels": (1, 2)
                      }
         response = self.client.post(create_url, task_data)
         self.assertEqual(response.status_code, 302)
@@ -45,7 +49,7 @@ class TaskTest(TestCase):
         # check added task
         response = self.client.get(self.list_url)
         statuses = response.context["tasks"]
-        self.assertContains(response, 'test task 3')
+        self.assertContains(response, "test task 3")
         self.assertTrue(len(statuses) == self.initial_count + 1)
 
     def test_task_detail(self):
@@ -59,13 +63,17 @@ class TaskTest(TestCase):
 
     def test_task_update(self):
         old_name = self.task.name
-        new_name = 'new test task'
+        new_name = "new test task"
         update_url = reverse("task_update", kwargs={"pk": self.task.id})
 
         # update task
         response = self.client.get(update_url)
         self.assertEqual(response.status_code, 200)
-        task_data = {'name': new_name, "status": 1}
+        task_data = {"name": new_name,
+                     "status": 1,
+                     "executor": 1,
+                     "labels": [2]
+                     }
         response = self.client.post(update_url, task_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.list_url)

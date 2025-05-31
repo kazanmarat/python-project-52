@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-29 10:40+0000\n"
+"POT-Creation-Date: 2025-05-30 05:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr "Пользователь успешно удален."
 msgid "Cannot delete user because it is in use."
 msgstr "Невозможно удалить пользователя, потому что он используется."
 
-#: labels/models.py:7 statuses/models.py:7 tasks/models.py:9
+#: labels/models.py:7 statuses/models.py:7 tasks/models.py:10
 msgid "name"
 msgstr "Имя"
 
@@ -73,7 +73,7 @@ msgstr "Метка успешно удалена."
 msgid "Cannot delete label because it is in use."
 msgstr "Невозможно удалить метку, потому что она используется."
 
-#: statuses/models.py:11 tasks/models.py:11 templates/tasks/task_detail.html:23
+#: statuses/models.py:11 tasks/models.py:12 templates/tasks/task_detail.html:23
 #: templates/tasks/task_list.html:13
 msgid "Status"
 msgstr "Статус"
@@ -99,24 +99,24 @@ msgstr "Статус успешно удален."
 msgid "Cannot delete status because it is in use."
 msgstr "Невозможно удалить статус, потому что он используется."
 
-#: tasks/models.py:10
+#: tasks/models.py:11
 msgid "description"
 msgstr "описание"
 
-#: tasks/models.py:22 templates/tasks/task_detail.html:19
+#: tasks/models.py:23 templates/tasks/task_detail.html:19
 #: templates/tasks/task_list.html:15
 msgid "Executor"
 msgstr "Исполнитель"
 
-#: tasks/models.py:24 templates/tasks/task_detail.html:31
-msgid "Tags"
-msgstr "Метки"
+#: tasks/models.py:25
+msgid "Label"
+msgstr "Метка"
 
-#: tasks/models.py:28
+#: tasks/models.py:30
 msgid "Task"
 msgstr "Задача"
 
-#: tasks/models.py:29 templates/_navigation.html:24
+#: tasks/models.py:31 templates/_navigation.html:24
 #: templates/tasks/task_list.html:5
 msgid "Tasks"
 msgstr "Задачи"
@@ -146,6 +146,7 @@ msgid "Users"
 msgstr "Пользователи"
 
 #: templates/_navigation.html:21 templates/labels/label_list.html:5
+#: templates/tasks/task_detail.html:31
 msgid "Labels"
 msgstr "Метки"
 
@@ -265,10 +266,8 @@ msgid "Delete task"
 msgstr "Удаление задачи"
 
 #: templates/tasks/task_detail.html:5
-#, fuzzy
-#| msgid "Task"
 msgid "View Task"
-msgstr "Задача"
+msgstr "Просмотр задачи"
 
 #: templates/tasks/task_detail.html:15 templates/tasks/task_list.html:14
 msgid "Author"

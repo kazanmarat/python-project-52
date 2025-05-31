@@ -6,11 +6,11 @@ class TaskCreationForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('name', 'description', 'status', 'executor', 'tag',)
+        exclude = ['author', 'date_creation']
 
 
 class TaskChangeForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('name', 'description', 'status', 'executor', 'tag',)
+        exclude = ['author', 'date_creation']
