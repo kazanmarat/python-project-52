@@ -1,11 +1,13 @@
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from .models import Task
 from .forms import TaskCreationForm, TaskChangeForm
+from django_filters.views import FilterView
+from .filter import TaskFilter
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
@@ -15,8 +17,9 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
         return redirect(reverse_lazy('login'))
 
 
-class TaskListView(CustomLoginRequiredMixin, ListView):
+class TaskListView(CustomLoginRequiredMixin, FilterView):
     model = Task
+    filterset_class = TaskFilter
     template_name = 'tasks/task_list.html'
     context_object_name = 'tasks'
     ordering = ['id']

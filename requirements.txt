@@ -13,12 +13,15 @@ django==5.2
     #   dj-database-url
     #   django-bootstrap5
     #   django-crispy-forms
+    #   django-filter
 django-bootstrap5==25.1
     # via hexlet-code (pyproject.toml)
 django-crispy-forms==2.4
     # via
     #   hexlet-code (pyproject.toml)
     #   crispy-bootstrap5
+django-filter==25.1
+    # via hexlet-code (pyproject.toml)
 gunicorn==23.0.0
     # via hexlet-code (pyproject.toml)
 packaging==25.0

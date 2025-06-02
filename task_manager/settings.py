@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_bootstrap5',
+    'django_filters',
     # Local
     'task_manager',
     'accounts',
