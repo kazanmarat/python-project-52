@@ -1,3 +1,4 @@
+from cProfile import label
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import CustomUser
@@ -48,9 +49,9 @@ class TaskTest(TestCase):
 
         # check added task
         response = self.client.get(self.list_url)
-        statuses = response.context["tasks"]
+        tasks = response.context["tasks"]
         self.assertContains(response, "test task 3")
-        self.assertTrue(len(statuses) == self.initial_count + 1)
+        self.assertTrue(len(tasks) == self.initial_count + 1)
 
     def test_task_detail(self):
         detail_url = reverse("task_detail", kwargs={"pk": self.task.id})
@@ -96,15 +97,29 @@ class TaskTest(TestCase):
         task_name = self.task.name
         delete_url = reverse("task_delete", kwargs={"pk": self.task.id})
 
-        # delete status
+        # delete task
         response = self.client.get(delete_url)
         self.assertEqual(response.status_code, 200)
         response = self.client.post(delete_url)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.list_url)
 
-        # check deleted status
+        # check deleted tasks
         response = self.client.get(self.list_url)
-        statuses = response.context["tasks"]
-        self.assertTrue(len(statuses) == self.initial_count - 1)
+        tasks = response.context["tasks"]
+        self.assertTrue(len(tasks) == self.initial_count - 1)
         self.assertNotContains(response, task_name)
+
+    def test_task_filter(self):
+        filter_data = {'status': 1, 'labels': 1}
+        response = self.client.get(self.list_url, filter_data)
+        tasks = response.context["tasks"]
+        self.assertTrue(len(tasks) == 1)
+        self.assertFalse(len(tasks) == 2)
+
+    def test_task_filter_empty(self):
+        filter_data = {'status': 2, 'executor': 1}
+        response = self.client.get(self.list_url, filter_data)
+        tasks = response.context["tasks"]
+        self.assertTrue(len(tasks) == 0)
+        self.assertFalse(len(tasks) == 2)

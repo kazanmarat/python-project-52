@@ -19,7 +19,7 @@ render-start:
 compile:
 	uv pip compile pyproject.toml -o requirements.txt
 
-test: test-accounts test-statuses test-tasks test-labels
+test: test-accounts test-statuses test-labels test-tasks 
 
 test-accounts:
 	uv run manage.py test accounts
