@@ -1,4 +1,3 @@
-from cProfile import label
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import CustomUser
