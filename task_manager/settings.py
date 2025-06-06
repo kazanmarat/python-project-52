@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
+DEBUG = os.getenv('DEBUG') in ['True', 'true', True, 1]
 
 ALLOWED_HOSTS = ['webserver', 'localhost', '127.0.0.1']
 RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
@@ -167,9 +167,10 @@ FIXTURE_DIRS = [BASE_DIR / 'fixtures']
 
 ROLLBAR_TOKEN = os.getenv('ROLLBAR_TOKEN') # rollbar
 
-ROLLBAR = {  
+ROLLBAR = { # rollbar
     'access_token': ROLLBAR_TOKEN,
-    'environment': 'development' if DEBUG else 'production',
+    'environment': 'production',
+    'code_version': '1.0',
     'branch': 'master',
     'root': BASE_DIR,
 }
