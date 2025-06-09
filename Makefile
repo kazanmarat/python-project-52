@@ -13,6 +13,9 @@ collectstatic:
 migrate:
 	uv run manage.py migrate
 
+start:
+	uv run gunicorn task_manager.wsgi
+
 render-start:
 	gunicorn task_manager.wsgi
 
