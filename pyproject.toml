@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10.12"
-packages = [{include = "task_manager"}]
 dependencies = [
     "crispy-bootstrap5>=2025.4",
     "dj-database-url>=2.3.0",
@@ -17,3 +16,10 @@ dependencies = [
     "python-dotenv>=1.1.0",
     "rollbar>=1.3.0",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["task_manager"]

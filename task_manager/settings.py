@@ -51,10 +51,10 @@ INSTALLED_APPS = [
     'django_filters',
     # Local
     'task_manager',
-    'accounts',
-    'statuses',
-    'tasks',
-    'labels',
+    'task_manager.accounts',
+    'task_manager.statuses',
+    'task_manager.tasks',
+    'task_manager.labels',
 ]
 
 MIDDLEWARE = [
@@ -74,7 +74,7 @@ ROOT_URLCONF = 'task_manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'task_manager' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,7 +125,7 @@ LANGUAGES = [ # i18n
     ('ru', 'Russian'),
 ]
 
-LOCALE_PATHS = [BASE_DIR / 'locale'] # i18n
+LOCALE_PATHS = [BASE_DIR / 'task_manager' / 'locale'] # i18n
 
 TIME_ZONE = 'UTC'
 
@@ -151,8 +151,6 @@ LOGOUT_REDIRECT_URL = 'home' # accounts
 
 CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5' # crispy_forms
 CRISPY_TEMPLATE_PACK = 'bootstrap5' # crispy_forms
-
-FIXTURE_DIRS = [BASE_DIR / 'fixtures']
 
 ROLLBAR_TOKEN = os.getenv('ROLLBAR_TOKEN') # rollbar
 
