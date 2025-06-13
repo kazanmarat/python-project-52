@@ -22,6 +22,9 @@ render-start:
 compile:
 	uv pip compile pyproject.toml -o requirements.txt
 
+lint:
+	uv run ruff check	
+
 test:
 	uv run manage.py test
 

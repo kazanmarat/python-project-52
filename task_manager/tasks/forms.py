@@ -6,10 +6,10 @@ from .models import Task
 class TaskCreationForm(forms.ModelForm):
     class Meta:
         model = Task
-        exclude = ["author", "date_creation"]
+        fields = ("name", "description", "status", "executor", "labels")
 
 
 class TaskChangeForm(forms.ModelForm):
     class Meta:
         model = Task
-        exclude = ["author", "date_creation"]
+        fields = ("name", "description", "status", "executor", "labels")
