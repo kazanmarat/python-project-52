@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-13 05:39+0000\n"
+"POT-Creation-Date: 2025-06-13 05:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,6 +190,9 @@ msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
 #: task_manager/templates/account/user_delete.html:10
+#: task_manager/templates/labels/label_delete.html:10
+#: task_manager/templates/statuses/status_delete.html:10
+#: task_manager/templates/tasks/task_delete.html:10
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
@@ -268,12 +271,6 @@ msgstr "Создать"
 msgid "Delete label"
 msgstr "Удаление метки"
 
-#: task_manager/templates/labels/label_delete.html:10
-#: task_manager/templates/statuses/status_delete.html:10
-#: task_manager/templates/tasks/task_delete.html:10
-msgid "Confirm"
-msgstr "Подтвердить"
-
 #: task_manager/templates/labels/label_list.html:12
 #: task_manager/templates/statuses/status_list.html:12
 #: task_manager/templates/tasks/task_list.html:21
@@ -323,8 +320,8 @@ msgstr "Показать"
 msgid "Change task"
 msgstr "Изменение задачи"
 
-#~ msgid "You are registered."
-#~ msgstr "Вы зарегистрированы."
+#~ msgid "Confirm"
+#~ msgstr "Подтвердить"
 
 #~ msgid "Label"
 #~ msgstr "Метка"
