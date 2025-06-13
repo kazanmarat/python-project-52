@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .forms import CustomUserCreationForm, CustomUserUpdateForm
+from .forms import CustomUserCreationForm, CustomUserUpdateForm, CustomUserLoginForm
 from .models import CustomUser
 
 
@@ -24,6 +24,7 @@ class SignUpView(CreateView):
 
 class UserLoginView(LoginView):
     template_name = "account/user_login.html"
+    form_class = CustomUserLoginForm
 
     def form_valid(self, form):
         response = super().form_valid(form)
