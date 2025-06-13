@@ -29,7 +29,7 @@ class Task(models.Model):
     )
     labels = models.ManyToManyField(
         Label,
-        verbose_name=_("Labels"),
+        verbose_name=_("Label"),
         blank=True,
         through="TaskLabel",
         through_fields=("task", "label"),
