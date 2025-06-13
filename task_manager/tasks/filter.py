@@ -14,7 +14,10 @@ class TaskFilter(django_filters.FilterSet):
     executor = django_filters.ModelChoiceFilter(
         queryset=CustomUser.objects.all()
     )
-    labels = django_filters.ModelChoiceFilter(queryset=Label.objects.all(), label=_("Label"))
+    labels = django_filters.ModelChoiceFilter(
+        queryset=Label.objects.all(), 
+        label=_("Label"),
+    )
     author = django_filters.BooleanFilter(
         widget=forms.CheckboxInput,
         method="check_author",

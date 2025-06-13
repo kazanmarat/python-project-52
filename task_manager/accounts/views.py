@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.db.models.deletion import ProtectedError
 from django.shortcuts import redirect
@@ -7,7 +6,13 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from .forms import CustomUserCreationForm, CustomUserUpdateForm, CustomUserLoginForm
+from task_manager.custom_mixins import CustomUserPassesTestMixin
+
+from .forms import (
+    CustomUserCreationForm,
+    CustomUserLoginForm,
+    CustomUserUpdateForm,
+)
 from .models import CustomUser
 
 
@@ -44,25 +49,6 @@ class UserListView(ListView):
     template_name = "account/user_list.html"
     context_object_name = "users"
     ordering = ["id"]
-
-
-class CustomUserPassesTestMixin(UserPassesTestMixin):
-    def test_func(self):
-        profile = self.get_object()
-        return profile == self.request.user
-
-    def handle_no_permission(self):
-        if self.request.user.is_anonymous:
-            messages.error(
-                self.request, _("You are not logged in! Please log in.")
-            )
-            return redirect(reverse_lazy("login"))
-        else:
-            messages.error(
-                self.request,
-                _("You do not have permission to modify another user."),
-            )
-            return redirect(reverse_lazy("user_list"))
 
 
 class UserUpdateView(CustomUserPassesTestMixin, UpdateView):

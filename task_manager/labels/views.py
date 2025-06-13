@@ -1,19 +1,14 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.deletion import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
+from task_manager.custom_mixins import CustomLoginRequiredMixin
+
 from .forms import LabelChangeForm, LabelCreationForm
 from .models import Label
-
-
-class CustomLoginRequiredMixin(LoginRequiredMixin):
-    def handle_no_permission(self):
-        messages.error(self.request, _("You are not logged in! Please log in."))
-        return redirect(reverse_lazy("login"))
 
 
 class LabelListView(CustomLoginRequiredMixin, ListView):

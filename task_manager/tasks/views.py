@@ -1,20 +1,16 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from django_filters.views import FilterView
 
+from task_manager.custom_mixins import CustomLoginRequiredMixin
+
 from .filter import TaskFilter
 from .forms import TaskChangeForm, TaskCreationForm
 from .models import Task
-
-
-class CustomLoginRequiredMixin(LoginRequiredMixin):
-    def handle_no_permission(self):
-        messages.error(self.request, _("You are not logged in! Please log in."))
-        return redirect(reverse_lazy("login"))
 
 
 class TaskListView(CustomLoginRequiredMixin, FilterView):
