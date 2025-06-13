@@ -18,7 +18,7 @@ class SignUpView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, _("You are registered."))
+        messages.success(self.request, _("User registered successfully"))
         return response
 
 

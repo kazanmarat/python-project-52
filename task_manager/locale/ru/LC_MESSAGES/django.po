@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-13 05:24+0000\n"
+"POT-Creation-Date: 2025-06-13 05:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,8 +29,8 @@ msgid "Last name"
 msgstr "Фамилия"
 
 #: task_manager/accounts/views.py:21
-msgid "You are registered."
-msgstr "Вы зарегистрированы."
+msgid "User registered successfully"
+msgstr "Пользователь успешно зарегистрирован."
 
 #: task_manager/accounts/views.py:31
 msgid "You are logged in."
@@ -319,6 +319,9 @@ msgstr "Показать"
 #: task_manager/templates/tasks/task_update.html:7
 msgid "Change task"
 msgstr "Изменение задачи"
+
+#~ msgid "You are registered."
+#~ msgstr "Вы зарегистрированы."
 
 #~ msgid "Label"
 #~ msgstr "Метка"
