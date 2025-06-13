@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 06:05+0000\n"
+"POT-Creation-Date: 2025-06-13 05:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,13 +170,11 @@ msgstr "Выход"
 
 #: task_manager/templates/_navigation.html:33
 #: task_manager/templates/account/user_login.html:6
-#: task_manager/templates/account/user_login.html:9
 msgid "Log in"
 msgstr "Вход"
 
 #: task_manager/templates/_navigation.html:36
 #: task_manager/templates/account/user_signup.html:6
-#: task_manager/templates/account/user_signup.html:9
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -233,6 +231,14 @@ msgstr "Изменить"
 #: task_manager/templates/tasks/task_list.html:40
 msgid "Delete"
 msgstr "Удалить"
+
+#: task_manager/templates/account/user_login.html:9
+msgid "Log In"
+msgstr "Войти"
+
+#: task_manager/templates/account/user_signup.html:9
+msgid "Register"
+msgstr "Зарегистрировать"
 
 #: task_manager/templates/account/user_update.html:7
 msgid "Update user data"
