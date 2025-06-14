@@ -22,8 +22,14 @@ render-start:
 compile:
 	uv pip compile pyproject.toml -o requirements.txt
 
+
+check: test lint
+
 lint:
 	uv run ruff check	
+
+test-coverage:
+	uv run coverage xml
 
 test:
 	uv run manage.py test
