@@ -6,7 +6,7 @@
 <h1>{% trans "Sign up" %}</h1>
 <form method="post">{% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" class="btn btn-primary" role='button' value='{% trans "Register" %}'>
+    <input type="submit" class="btn btn-primary" value='{% trans "Register" %}'>
 </form>
 
 {% endblock %}
