@@ -3,7 +3,7 @@
 
 Task Manager is a training project for creating a task management system. This web service ([Render](https://python-project-52-o0yq.onrender.com/)) makes it convenient to work with tasks. \
 All visitors to the site initially have access only to a list of all registered users.
- 
+
 ### After registration, additional options become available:
 - Editing your profile. Changing or deleting information about yourself. If the user is the author or performer of a task, deleting it is not available;
 - Viewing, adding, updating and deleting task statuses and labels after logging in. Statuses and labels corresponding to any tasks cannot be deleted;
