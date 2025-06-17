@@ -8,6 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
       DEBUG: False
       DATABASE_URL: sqlite:///db.sqlite3
     steps:
