@@ -29,6 +29,7 @@ lint:
 	uv run ruff check	
 
 test-coverage:
+	uv run coverage run --source='.' manage.py test
 	uv run coverage xml
 
 test:
