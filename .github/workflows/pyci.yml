@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DEBUG: False
+      DATABASE_URL: sqlite:///db.sqlite3
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -17,7 +20,7 @@ jobs:
         run: |
           pip install uv
           make install
-      - name: Run linter
+      - name: Run linter and test
         run: |
           make check
       - name: Run test coverage
