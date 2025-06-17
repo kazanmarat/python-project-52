@@ -1,4 +1,6 @@
 # Task Manager
+[![Actions Status](https://github.com/kazanmarat/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/kazanmarat/python-project-52/actions)
+
 Task Manager is a training project for creating a task management system. This web service ([Render](https://python-project-52-o0yq.onrender.com/)) makes it convenient to work with tasks. \
 All visitors to the site initially have access only to a list of all registered users.
  
@@ -30,6 +32,3 @@ Prepare the environment variables according to the `.env_example` file. \
 #### Starting a server
     make start
 
-
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/kazanmarat/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/kazanmarat/python-project-52/actions)
