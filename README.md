@@ -1,5 +1,8 @@
 # Task Manager
 [![Actions Status](https://github.com/kazanmarat/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/kazanmarat/python-project-52/actions)
+[![PyCI](https://github.com/kazanmarat/python-project-52/actions/workflows/pyci.yml/badge.svg)](https://github.com/kazanmarat/python-project-52/actions)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=kazanmarat_python-project-52&metric=coverage)](https://sonarcloud.io/summary/new_code?id=kazanmarat_python-project-52)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=kazanmarat_python-project-52&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=kazanmarat_python-project-52)
 
 Task Manager is a training project for creating a task management system. This web service ([Render](https://python-project-52-o0yq.onrender.com/)) makes it convenient to work with tasks. \
 All visitors to the site initially have access only to a list of all registered users.
