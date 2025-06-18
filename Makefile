@@ -19,10 +19,6 @@ start:
 render-start:
 	gunicorn task_manager.wsgi
 
-compile:
-	uv pip compile pyproject.toml -o requirements.txt
-
-
 check: test lint
 
 lint:
